@@ -13,8 +13,8 @@ namespace Infrastructure.Inventory
         private Vector2 _offset;
         private bool _isDraggable = true;
 
-        public event Action OnBeginDragged;
-        public event Action OnEndDragged;
+        public event Action<ItemDragHandler> OnBeginDragged;
+        public event Action<ItemDragHandler> OnEndDragged;
 
         public void EnableDraggable() => _isDraggable = true;
         
@@ -27,7 +27,7 @@ namespace Infrastructure.Inventory
             var localPoint = GetLocalPoint(eventData);
             _offset = localPoint - _rectTransform.anchoredPosition;
             
-            OnBeginDragged?.Invoke();
+            OnBeginDragged?.Invoke(this);
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -42,7 +42,7 @@ namespace Infrastructure.Inventory
         {
             if (_isDraggable == false) return;
 
-            OnEndDragged?.Invoke();
+            OnEndDragged?.Invoke(this);
         }
 
         private void Awake()
