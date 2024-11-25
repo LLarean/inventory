@@ -10,7 +10,7 @@ namespace UI.Inventory
         [Space]
         [SerializeField] private int _numberOfItems;
 
-        private List<ItemView> _items;
+        private List<ItemView> _items = new List<ItemView>();
         
         private void Start()
         {
